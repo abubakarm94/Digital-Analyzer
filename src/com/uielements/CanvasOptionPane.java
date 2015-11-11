@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import com.abstractClasses.AbstractViewOptionPane;
 import com.connectedcomponents.FindConnectedComponents;
 import com.imagethreshold.ImageToGrayscale;
 import com.main.PreTrainedNeuralNetwork;
@@ -31,10 +32,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class CanvasOptionPane extends Tab {
-
-	// how far the drawing is recognized.
-	private final int DRAWABLE_EXTENT = 10;
+public class CanvasOptionPane extends AbstractViewOptionPane {
 
 	private Canvas imageDisplay = new Canvas(381, 81);
 
@@ -45,19 +43,7 @@ public class CanvasOptionPane extends Tab {
 
 	private HBox buttonContent = new HBox(8, recongizeWriting, clearWriting);
 
-	private Label finalResultArea = new Label();
-
 	private VBox imageContentDisplay = new VBox(8, imageDisplay, buttonContent, finalResultArea);
-
-	private final BorderPane contentLayout = new BorderPane();
-
-	private FindConnectedComponents findCC;
-
-	private PreTrainedNeuralNetwork neuralNetwork;
-
-	private SplitPane splitScreen = new SplitPane();
-
-	private LogArea logArea = LogArea.getInstance();
 
 	private WritableImage currentImage = null;
 
@@ -65,11 +51,9 @@ public class CanvasOptionPane extends Tab {
 
 		setUpGraphics();
 
-		this.setClosable(false);
-		this.setContent(splitScreen);
-
 		recongizeWriting.setOnAction(performAnalysisOnCanvas());
 		clearWriting.setOnAction(clearCanvas());
+		
 	}
 
 	private EventHandler<ActionEvent> clearCanvas() {

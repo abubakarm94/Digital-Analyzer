@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.abstractClasses.AbstractViewOptionPane;
 import com.connectedcomponents.FindConnectedComponents;
 import com.enums.LogAreaEnums;
 import com.imagethreshold.ImageToGrayscale;
@@ -35,7 +36,7 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class ImageOptionPane extends Tab {
+public class ImageOptionPane extends AbstractViewOptionPane {
 
 	private ImageView imageDisplay = new ImageView();
 
@@ -44,29 +45,16 @@ public class ImageOptionPane extends Tab {
 
 	private HBox buttonContent = new HBox(8,chooseNew, analyzeImage);
 	
-	private Label finalResultArea = new Label();
-
 	private VBox imageContentDisplay = new VBox(8, imageDisplay, buttonContent, finalResultArea);
 
-	private final BorderPane contentLayout = new BorderPane();
-
-	private SplitPane splitScreen = new SplitPane();
-
-	private LogArea logArea = LogArea.getInstance();
 
 	private Image currentImage;
 	
-	private FindConnectedComponents findCC;
-	
-	private PreTrainedNeuralNetwork neuralNetwork;
 
 	public ImageOptionPane() {
 
 		setUpGraphics();
-
-		this.setClosable(false);
-		this.setContent(splitScreen);
-
+		
 		chooseNew.setOnAction(selectNewImage());
 		analyzeImage.setOnAction(startAnalyzesOnImage());
 	}
