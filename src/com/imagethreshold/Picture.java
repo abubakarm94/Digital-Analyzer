@@ -115,6 +115,17 @@ public final class Picture {
 			throw new RuntimeException("Could not open file: " + filename);
 		}
 	}
+	
+	public Picture(BufferedImage image2) {
+		image = image2;
+
+		
+		width = image.getWidth(null);
+		height = image.getHeight(null);
+		
+		filename = width + "-by-" + height;
+
+	}
 
 	/**
 	 * Initializes a picture by reading in a .png, .gif, or .jpg from a file.
