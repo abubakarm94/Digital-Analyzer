@@ -78,8 +78,7 @@ public class CanvasOptionPane extends Tab {
 
 			@Override
 			public void handle(ActionEvent event) {
-				graphicsContext.clearRect(0, 0, imageDisplay.getWidth(),
-						imageDisplay.getHeight() );
+				resetDrawingCanvas();
 				logArea.append("Screen cleared");
 
 			}
@@ -99,9 +98,8 @@ public class CanvasOptionPane extends Tab {
 
 				findCC = new FindConnectedComponents(tempImage);
 
-			//	imageDisplay.setImage(SwingFXUtils.toFXImage(findCC.getProcessedImage(), null));
-				findCC.exportConnectedComponentsAsImages();
-				graphicsContext.drawImage(SwingFXUtils.toFXImage(findCC.getProcessedImage(), null), imageDisplay.getWidth(), imageDisplay.getHeight());
+				resetDrawingCanvas();
+				graphicsContext.drawImage(SwingFXUtils.toFXImage(findCC.getProcessedImage(), null), 0, 0);
 
 				neuralNetwork = PreTrainedNeuralNetwork.getInstance();
 				ArrayList<BufferedImage> list = findCC.getConnectedComponentsAsList();
@@ -137,16 +135,24 @@ public class CanvasOptionPane extends Tab {
 		setUpCanvas(graphicsContext);
 
 	}
+	
+	private void resetDrawingCanvas(){
+		graphicsContext.clearRect(0, 0, imageDisplay.getWidth(),
+				imageDisplay.getHeight() );
+		graphicsContext.setFill(Color.WHITE);
+		graphicsContext.fillRect(0, 0, imageDisplay.getWidth(), imageDisplay.getHeight());
+	}
 
 	private void setUpCanvas(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		double canvasWidth = gc.getCanvas().getWidth();
 		double canvasHeight = gc.getCanvas().getHeight();
 
-		gc.setFill(Color.LIGHTGRAY);
+		gc.setFill(Color.WHITE);
+		gc.fillRect(0, 0, imageDisplay.getWidth(), imageDisplay.getHeight());
 		gc.setStroke(Color.BLACK);
 
-		gc.setLineWidth(1);
+		gc.setLineWidth(4);
 
 		imageDisplay.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 

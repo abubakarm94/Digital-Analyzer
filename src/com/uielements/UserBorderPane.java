@@ -43,6 +43,7 @@ public class UserBorderPane extends BorderPane {
 	private MenuItem fileNew = new MenuItem("New Digital Analysis");
 	private final MenuItem fileExit = new MenuItem("Exit");
 
+	private final MenuItem featuresManualTraining = new MenuItem("Train Neural Network Manually");
 
 	private TabPane contentTab = new TabPane();
 
@@ -66,6 +67,8 @@ public class UserBorderPane extends BorderPane {
 	private void configureMenuBar() {
 
 		fileMenu.getItems().addAll(fileNew, fileExit);
+
+		featuresMenu.getItems().addAll(featuresManualTraining);
 
 		menuBar.getMenus().addAll(fileMenu, featuresMenu);
 
