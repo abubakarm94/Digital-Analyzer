@@ -149,7 +149,7 @@ public class UserBorderPane extends BorderPane {
 						currentTab.setText(ciSelector.getValue());
 
 						contentTab.getTabs().addAll(currentTab);
-
+						contentTab.getSelectionModel().select(currentTab);
 						parentStage.close();
 
 					}

@@ -48,7 +48,7 @@ public class Backpropagator {
             sum += errors[epoch % samples];
 
             if(epoch > samples) {
-                average = sum / samples;
+               average = sum / samples;
             }
 
             System.out.println("Error for epoch " + epoch + ": " + error + ". Average: " + average + (characteristicTime > 0 ? " Learning rate: " + learningRate / (1 + (currentEpoch / characteristicTime)): ""));

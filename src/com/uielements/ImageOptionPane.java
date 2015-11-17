@@ -1,5 +1,6 @@
 package com.uielements;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.image.BufferedImage;
@@ -43,18 +44,19 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 	private Button chooseNew = new Button("Choose New Image");
 	private Button analyzeImage = new Button("Analyze Image");
 
-	private HBox buttonContent = new HBox(8,chooseNew, analyzeImage);
-	
-	private VBox imageContentDisplay = new VBox(8, imageDisplay, buttonContent, finalResultArea);
+	private HBox buttonContent = new HBox(8, chooseNew, analyzeImage);
 
+	private VBox imageContentDisplay = new VBox(8, imageDisplay, buttonContent, finalResultArea);
 
 	private Image currentImage;
 	
+	private final int finalWidth = 381;
+	private final int finalHeight = 81;
 
 	public ImageOptionPane() {
 
 		setUpGraphics();
-		
+
 		chooseNew.setOnAction(selectNewImage());
 		analyzeImage.setOnAction(startAnalyzesOnImage());
 	}
@@ -66,34 +68,33 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				//First we need to convert the image to back and white
-				currentImage = new ImageToGrayscale((BufferedImage)currentImage).getConvertedImage();
+				// First we need to convert the image to back and white
+				currentImage = new ImageToGrayscale((BufferedImage) currentImage).getConvertedImage();
 
 				findCC = new FindConnectedComponents(currentImage);
-				
+
 				imageDisplay.setImage(SwingFXUtils.toFXImage(findCC.getProcessedImage(), null));
-				
-				
+
 				neuralNetwork = PreTrainedNeuralNetwork.getInstance();
 				ArrayList<BufferedImage> list = findCC.getConnectedComponentsAsList();
-				String result="";
-				for(BufferedImage bi: list){
+				String result = "";
+				for (BufferedImage bi : list) {
 					double[] data = neuralNetwork.convertTo2DArray(bi);
-					result += neuralNetwork.processInput(data)+" ";
-					
+					result += neuralNetwork.processInput(data) + " ";
+
 				}
-		
-				finalResultArea.setText("The result is: "+ result);
-				
-				logArea.append("The result is: "+result);
-				
+
+				finalResultArea.setText("The result is: " + result);
+
+				logArea.append("The result is: " + result);
+
 			}
 
 		};
 	}
-	
-	public void printResult(int[] data){
-		System.out.println(data[0]+", "+data[1]+", "+ data[2]);
+
+	public void printResult(int[] data) {
+		System.out.println(data[0] + ", " + data[1] + ", " + data[2]);
 	}
 
 	public void setUpGraphics() {
@@ -108,7 +109,7 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 		splitScreen.setOrientation(Orientation.VERTICAL);
 
 		analyzeImage.setDisable(true);
-		
+
 		finalResultArea.setFont(new Font(20));
 	}
 
@@ -132,8 +133,8 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 				File fileForAnalysis = chooseFile.showOpenDialog(getTabPane().getScene().getWindow());
 
 				try {
-					currentImage = ImageIO.read(fileForAnalysis);
-					javafx.scene.image.Image temp = SwingFXUtils.toFXImage(ImageIO.read(fileForAnalysis), null);
+					currentImage = resizeImage(ImageIO.read(fileForAnalysis));
+					javafx.scene.image.Image temp = SwingFXUtils.toFXImage(resizeImage(ImageIO.read(fileForAnalysis)), null);
 					imageDisplay.setImage(temp);
 					analyzeImage.setDisable(false);
 					logArea.append(LogAreaEnums.ImageReadyForAnalysis);
@@ -146,6 +147,27 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 			}
 
 		};
+	}
+
+	/*
+	 * Resize the image if either the height or the width is greater than the preferred size
+	 */
+	public BufferedImage resizeImage(BufferedImage image) {
+		
+		BufferedImage resizedImage  = null;
+		if (image.getWidth() > finalWidth || image.getHeight() > finalHeight) {
+
+			resizedImage = new BufferedImage(finalWidth, finalHeight, BufferedImage.TYPE_INT_ARGB);
+			Graphics2D g = resizedImage.createGraphics();
+			g.drawImage(image, 0, 0, finalWidth, finalHeight, null);
+			g.dispose();
+
+		}else{
+			return image;
+		}
+
+		return resizedImage;
+
 	}
 
 }

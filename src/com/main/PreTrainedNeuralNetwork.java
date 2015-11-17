@@ -98,18 +98,22 @@ public class PreTrainedNeuralNetwork {
 
 	}
 
+	/*
+	 * Converts a BufferedImage to an array of 0s (whites) and 255s (blacks)
+	 */
 	public double[] convertTo2DArray(BufferedImage image) {
 		double[][] data = new double[20][20];
-		for (int y = 0; y < 20; y++) {
-			for (int x = 0; x < 20; x++) {
-				double info = image.getRGB(x, y);
-
+		for (int x = 0; x < data.length; x++) {
+			for (int y = 0; y < data.length; y++) {
+				double info = image.getRGB(y,x);
+				
 				if (info != 0.0) {
 					info = 255;
 				}
-				data[y][x] = info;
+				data[x][y] = info;
 			}
 		}
+		
 		return imageDataToSingleArray(convertToNeededSize(data));
 
 	}
@@ -120,21 +124,20 @@ public class PreTrainedNeuralNetwork {
 	private double[][] convertToNeededSize(double[][] data) {
 		double[][] padded = new double[imageSize][imageSize];
 
-		for (int y = 0; y < imageSize; y++) {
-			for (int x = 0; x < imageSize; x++) {
+		for (int x = 0; x < imageSize; x++) {
+			for (int y = 0; y < imageSize; y++) {
 
-				if (y - 4 < 0) {
-					padded[y][x] = 0;
-
-				} else if ((y - 4 >= 0) && (x - 4 < 0)) {
-					padded[y][x] = 0;
-
-				} else {
-					if ((!(y - 4 >= 20)) && (!(x - 4 >= 20))) {
-						padded[y][x] = data[y - 4][x - 4];
+				if((y - 4 == 0) && (x - 4 == 0)) {
+					padded[x][y] = data[x-4][y-4];
+				} 
+				else if(((y-4 >= 0) && (y-4 != 0)) && ((x-4 >= 0) && (x-4 != 0)) ){
+					if(y-4 >= 20 || x-4 >= 20){
+						padded[x][y] = 0;
 					}else{
-						padded[y][x] =0;
+					padded[x][y] = data[x-4][y-4];
 					}
+				}else{
+					padded[x][y] =0;
 				}
 
 			}
@@ -150,35 +153,19 @@ public class PreTrainedNeuralNetwork {
 		double[] imageData = new double[imageSize * imageSize];
 
 		int count = 0;
-		for (int y = 0; y < imageSize; y++) {
-			for (int x = 0; x < imageSize; x++) {
-				imageData[count] = data[y][x];
+		for (int x = 0; x < imageSize; x++) {
+			for (int y = 0; y < imageSize; y++) {
+				imageData[count] = data[x][y];
 				count++;
 			}
 		}
+
 		return imageData;
 	}
 
-	public double[] convertImageToArray(BufferedImage image) {
-		double[] imageData = new double[imageSize * imageSize];
-		int count = 0;
-		String hello = "";
-		for (int y = 0; y < imageSize; y++) {
-			for (int x = 0; x < imageSize; x++) {
-				double data = image.getRGB(x, y);
-
-				if (data != 0.0) {
-					data = 255;
-				}
-
-				hello += data + ", ";
-				imageData[count] = data;
-				count++;
-			}
-		}
-		// System.out.println(hello);
-		return imageData;
-
+	
+	public NeuralNetwork getNeuralNetwork(){
+		return neuralNetwork;
 	}
 
 }

@@ -91,11 +91,11 @@ public class NeuralNetwork implements Serializable {
     }
 
     public void setInputs(double[] inputs) {
+    	
         if(input != null) {
 
             int biasCount = input.hasBias() ? 1 : 0;
-            
-            
+
             if(input.getNeurons().size() - biasCount != inputs.length) {
                 throw new IllegalArgumentException("The number of inputs must equal the number of neurons in the input layer");
             }

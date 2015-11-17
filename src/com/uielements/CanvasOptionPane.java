@@ -136,7 +136,7 @@ public class CanvasOptionPane extends AbstractViewOptionPane {
 		gc.fillRect(0, 0, imageDisplay.getWidth(), imageDisplay.getHeight());
 		gc.setStroke(Color.BLACK);
 
-		gc.setLineWidth(4);
+		gc.setLineWidth(5);
 
 		imageDisplay.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 
