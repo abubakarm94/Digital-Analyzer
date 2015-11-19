@@ -26,6 +26,7 @@ public abstract class AbstractViewOptionPane extends Tab{
 
 	
 	public AbstractViewOptionPane(){
+
 		this.setClosable(false);
 		this.setContent(splitScreen);
 	}

@@ -95,7 +95,7 @@ public class NeuralNetwork implements Serializable {
         if(input != null) {
 
             int biasCount = input.hasBias() ? 1 : 0;
-
+            
             if(input.getNeurons().size() - biasCount != inputs.length) {
                 throw new IllegalArgumentException("The number of inputs must equal the number of neurons in the input layer");
             }
@@ -103,7 +103,9 @@ public class NeuralNetwork implements Serializable {
             else {
                 List<Neuron> neurons = input.getNeurons();
                 for(int i = biasCount; i < neurons.size(); i++) {
-                    neurons.get(i).setOutput(inputs[i - biasCount]);
+                	
+                 neurons.get(i).setOutput(inputs[i - biasCount]);
+                 
                 }
             }
         }
@@ -124,6 +126,7 @@ public class NeuralNetwork implements Serializable {
 
         int i = 0;
         for(Neuron neuron : output.getNeurons()) {
+        	
             outputs[i] = neuron.getOutput();
             i++;
         }

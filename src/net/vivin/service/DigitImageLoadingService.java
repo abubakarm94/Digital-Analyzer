@@ -110,7 +110,7 @@ public class DigitImageLoadingService {
         for(int i = 0; i < numberOfLabels; i++) {
             int label = labelBytes[OFFSET_SIZE + ITEMS_SIZE + i];
             byte[] imageData = Arrays.copyOfRange(imageBytes, (i * IMAGE_SIZE) + IMAGE_OFFSET, (i * IMAGE_SIZE) + IMAGE_OFFSET + IMAGE_SIZE);
-
+            
             images.add(new DigitImage(label, imageData));
         }
 

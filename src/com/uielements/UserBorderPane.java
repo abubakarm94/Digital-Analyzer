@@ -54,6 +54,8 @@ public class UserBorderPane extends BorderPane {
 		configureMenuBar();
 
 		contentTab.setSide(Side.LEFT);
+		
+
 
 		this.setCenter(contentTab);
 
@@ -114,12 +116,7 @@ public class UserBorderPane extends BorderPane {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				/*
-				 * FileChooser chooseFile = new FileChooser();
-				 * chooseFile.setTitle("Select File For Analysis"); File
-				 * fileForELA =
-				 * chooseFile.showOpenDialog(getScene().getWindow());
-				 */
+
 				Stage parentStage = new Stage();
 
 				ObservableList<CanvasOrImageSelector> options = FXCollections
@@ -146,6 +143,7 @@ public class UserBorderPane extends BorderPane {
 						CanvasOrImageSelector ciSelector = (CanvasOrImageSelector) optionSelector.getSelectionModel()
 								.getSelectedItem();
 						Tab currentTab = ciSelector.getSelectedOption();
+						
 						currentTab.setText(ciSelector.getValue());
 
 						contentTab.getTabs().addAll(currentTab);

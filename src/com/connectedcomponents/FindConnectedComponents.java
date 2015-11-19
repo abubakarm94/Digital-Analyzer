@@ -241,14 +241,32 @@ public class FindConnectedComponents extends PixelPosition{
 		}
 		inputGD.drawRect(minX, minY, maxX - minX, maxY - minY);
 		
-		return resizeImage(bmp);
+		
+		return resizeImage((bmp));
 	}
 	
+	
+
+	/*
+	 * Center the image into a 20 by 20 image
+	 */
 	  private  BufferedImage resizeImage(BufferedImage originalImage){
+		  	final int shiftBy = 2;
+		  	
 			BufferedImage resizedImage = new BufferedImage(imageSize, imageSize,  BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g = resizedImage.createGraphics();
-			g.drawImage(originalImage, 0, 0, imageSize, imageSize, null);
+			
+			
+			int dx1 = (((originalImage.getWidth()/originalImage.getHeight())*imageSize)+shiftBy);
+			int dy1 = shiftBy;
+			int dx2 = (imageSize - dx1);
+			int dy2 = (imageSize - dy1);
+			
+			
+			g.drawImage(originalImage, dx1,dy1, dx2,dy2, 0,0, originalImage.getWidth(), originalImage.getHeight(), null);
 			g.dispose();
+	
+			
 				
 			return resizedImage;
 		    }

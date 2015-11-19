@@ -2,6 +2,8 @@ package com.main;
 
 
 
+import java.io.File;
+
 import com.uielements.UserBorderPane;
 
 import javafx.application.Application;
@@ -23,6 +25,7 @@ public class MainGUI extends Application{
 		rootLayout = new UserBorderPane();
 		Scene scene = new Scene(rootLayout, 900, 600);
 		
+
 		this.primaryStage.setScene(scene);
 		this.primaryStage.show();
 	}

@@ -27,6 +27,7 @@ public class DigitImage {
 
     //Uses Otsu's Threshold algorithm to convert from grayscale to black and white
     private void otsu() {
+    	
         int[] histogram = new int[256];
 
         for(double datum : data) {

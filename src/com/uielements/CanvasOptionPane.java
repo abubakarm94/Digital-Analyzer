@@ -2,6 +2,7 @@ package com.uielements;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -34,7 +35,7 @@ import javafx.scene.text.Font;
 
 public class CanvasOptionPane extends AbstractViewOptionPane {
 
-	private Canvas imageDisplay = new Canvas(381, 81);
+	private Canvas imageDisplay = new Canvas(381, 100);
 
 	private final GraphicsContext graphicsContext = imageDisplay.getGraphicsContext2D();
 
@@ -77,12 +78,14 @@ public class CanvasOptionPane extends AbstractViewOptionPane {
 			@Override
 			public void handle(ActionEvent event) {
 				currentImage = imageDisplay.snapshot(null, currentImage);
+				
 
 				java.awt.Image tempImage = new ImageToGrayscale(SwingFXUtils.fromFXImage(currentImage, null)).getConvertedImage();
 
 				findCC = new FindConnectedComponents(tempImage);
 
 				resetDrawingCanvas();
+				
 				graphicsContext.drawImage(SwingFXUtils.toFXImage(findCC.getProcessedImage(), null), 0, 0);
 
 				neuralNetwork = PreTrainedNeuralNetwork.getInstance();

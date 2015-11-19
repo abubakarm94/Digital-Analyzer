@@ -17,7 +17,6 @@ public class TrainingData {
     }
 
     public double[][] getInputs() {
-    	
         return inputs;
     }
 
