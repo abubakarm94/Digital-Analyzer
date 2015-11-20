@@ -245,7 +245,7 @@ public class FindConnectedComponents extends PixelPosition{
 		inputGD.drawRect(minX, minY, maxX - minX, maxY - minY);
 		
 		
-		return resizeImage((bmp));
+		return resizeImage(bmp);
 	}
 	
 	
@@ -259,11 +259,26 @@ public class FindConnectedComponents extends PixelPosition{
 			BufferedImage resizedImage = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE,  BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g = resizedImage.createGraphics();
 			
-			
-			int dx1 = (((originalImage.getWidth()/originalImage.getHeight())*IMAGE_SIZE)+shiftBy);
+			int dx1 = (shiftBy);
 			int dy1 = shiftBy;
 			int dx2 = (IMAGE_SIZE - dx1);
 			int dy2 = (IMAGE_SIZE - dy1);
+
+			
+			//Keep original width if possible
+			if(IMAGE_SIZE >= originalImage.getWidth()){
+				dx1 = IMAGE_SIZE - originalImage.getWidth();
+				dx2 = (originalImage.getWidth());
+
+			}
+			
+			//keep original height if possible -- might not be needed. We'll see
+			if(IMAGE_SIZE >= originalImage.getHeight()){
+				dy1 = IMAGE_SIZE -originalImage.getHeight();
+				dy2 = originalImage.getHeight();
+			}
+			
+		
 			
 			
 			g.drawImage(originalImage, dx1,dy1, dx2,dy2, 0,0, originalImage.getWidth(), originalImage.getHeight(), null);

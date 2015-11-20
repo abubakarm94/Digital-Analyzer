@@ -8,14 +8,13 @@ import com.uielements.TrainOnCanvasOptionPane;
 import javafx.scene.control.Tab;
 
 public enum CanvasOrImageSelector {
-	ImageSelector("Perform Analysis on an Image", new ImageOptionPane()),
-	CanvasSelector("Perform Analysis on a Canvas",new CanvasOptionPane()), 
-	CanvasTrainingSelector("Train Neural Network using Canvas", new TrainOnCanvasOptionPane());
+	ImageSelector("Perform Analysis on an Image",  ImageOptionPane.class),
+	CanvasSelector("Perform Analysis on a Canvas", CanvasOptionPane.class); 
 
 	private String title;
-	private AbstractViewOptionPane selectedOption;
+	private Class selectedOption;
 
-	CanvasOrImageSelector(String data, AbstractViewOptionPane selectedClass) {
+	CanvasOrImageSelector(String data, Class selectedClass) {
 		title = data;
 		selectedOption = selectedClass;
 
@@ -25,7 +24,7 @@ public enum CanvasOrImageSelector {
 		return title;
 	}
 
-	public AbstractViewOptionPane getSelectedOption() {
+	public Class getSelectedOption() {
 		return selectedOption;
 	}
 
