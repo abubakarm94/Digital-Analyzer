@@ -1,24 +1,8 @@
 package com.imagethreshold;
 
-/******************************************************************************
- *  Compilation:  javac Picture.java
- *  Execution:    java Picture imagename
- *  Dependencies: none
- *
-	 *  Data type for manipulating individual pixels of an image. The original
-	 *  image can be read from a file in jpg, gif, or png format, or the
-	 *  user can create a blank image of a given size. Includes methods for
-	 *  displaying the image in a window on the screen or saving to a file.
-	 *
-	 *  % java Picture mandrill.jpg
-	 *
-	 *  Remarks
-	 *  -------
-	 *   - pixel (x, y) is column x and row y, where (0, 0) is upper left
-	 *
-	 *   - see also GrayPicture.java for a grayscale version
-	 *
-	 ******************************************************************************/
+/*
+ * Class for manipulating individual pixel in image
+ */
 
 import java.awt.Color;
 import java.awt.FileDialog;
@@ -47,16 +31,7 @@ public final class Picture {
 	private boolean isOriginUpperLeft = true; // location of origin
 	private final int width, height; // width and height
 
-	/**
-	 * Initializes a blank <tt>width</tt>-by-<tt>height</tt> picture, with
-	 * <tt>width</tt> columns and <tt>height</tt> rows, where each pixel is
-	 * black.
-	 *
-	 * @param width
-	 *            the width of the picture
-	 * @param height
-	 *            the height of the picture
-	 */
+
 	public Picture(int width, int height) {
 		if (width < 0)
 			throw new IllegalArgumentException("width must be nonnegative");
@@ -69,11 +44,9 @@ public final class Picture {
 		filename = width + "-by-" + height;
 	}
 
-	/**
+	/*
 	 * Initializes a new picture that is a deep copy of the argument picture.
 	 *
-	 * @param picture
-	 *            the picture to copy
 	 */
 	public Picture(Picture picture) {
 		width = picture.width();
@@ -85,11 +58,9 @@ public final class Picture {
 				image.setRGB(col, row, picture.get(col, row).getRGB());
 	}
 
-	/**
+	/*
 	 * Initializes a picture by reading from a file or URL.
 	 *
-	 * @param filename
-	 *            the name of the file (.png, .gif, or .jpg) or URL.
 	 */
 	public Picture(String filename) {
 		this.filename = filename;
@@ -116,6 +87,9 @@ public final class Picture {
 		}
 	}
 	
+	/*
+	 * Initializes the picture by passing in BufferedImage
+	 */
 	public Picture(BufferedImage image2) {
 		image = image2;
 
@@ -127,11 +101,9 @@ public final class Picture {
 
 	}
 
-	/**
+	/*
 	 * Initializes a picture by reading in a .png, .gif, or .jpg from a file.
 	 *
-	 * @param file
-	 *            the file
 	 */
 	public Picture(File file) {
 		try {
@@ -148,10 +120,9 @@ public final class Picture {
 		filename = file.getName();
 	}
 
-	/**
+	/*
 	 * returns the modified / non modified image -- add by us
 	 * 
-	 * @return Image
 	 */
 	public Image getImage() {
 		if (image == null) {
@@ -160,49 +131,39 @@ public final class Picture {
 		return image;
 	}
 
-	/**
+	/*
 	 * Sets the origin to be the upper left pixel. This is the default.
 	 */
 	public void setOriginUpperLeft() {
 		isOriginUpperLeft = true;
 	}
 
-	/**
+	/*
 	 * Sets the origin to be the lower left pixel.
 	 */
 	public void setOriginLowerLeft() {
 		isOriginUpperLeft = false;
 	}
 
-	/**
+	/*
 	 * Returns the height of the picture.
 	 *
-	 * @return the height of the picture (in pixels)
 	 */
 	public int height() {
 		return height;
 	}
 
-	/**
+	/*
 	 * Returns the width of the picture.
 	 *
-	 * @return the width of the picture (in pixels)
 	 */
 	public int width() {
 		return width;
 	}
 
-	/**
-	 * Returns the color of pixel (<tt>col</tt>, <tt>row</tt>).
+	/*
+	 * Returns the color of pixel by passing in y and x
 	 *
-	 * @param col
-	 *            the column index
-	 * @param row
-	 *            the row index
-	 * @return the color of pixel (<tt>col</tt>, <tt>row</tt>)
-	 * @throws IndexOutOfBoundsException
-	 *             unless both 0 &le; <tt>col</tt> &lt; <tt>width</tt> and 0
-	 *             &le; <tt>row</tt> &lt; <tt>height</tt>
 	 */
 	public Color get(int col, int row) {
 		if (col < 0 || col >= width())
@@ -215,20 +176,9 @@ public final class Picture {
 			return new Color(image.getRGB(col, height - row - 1));
 	}
 
-	/**
-	 * Sets the color of pixel (<tt>col</tt>, <tt>row</tt>) to given color.
+	/*
+	 * Sets the color of pixel y and x to given color.
 	 *
-	 * @param col
-	 *            the column index
-	 * @param row
-	 *            the row index
-	 * @param color
-	 *            the color
-	 * @throws IndexOutOfBoundsException
-	 *             unless both 0 &le; <tt>col</tt> &lt; <tt>width</tt> and 0
-	 *             &le; <tt>row</tt> &lt; <tt>height</tt>
-	 * @throws NullPointerException
-	 *             if <tt>color</tt> is <tt>null</tt>
 	 */
 	public void set(int col, int row, Color color) {
 		if (col < 0 || col >= width())
@@ -243,14 +193,9 @@ public final class Picture {
 			image.setRGB(col, height - row - 1, color.getRGB());
 	}
 
-	/**
+	/*
 	 * Returns true if this picture is equal to the argument picture.
 	 *
-	 * @param other
-	 *            the other picture
-	 * @return <tt>true</tt> if this picture is the same dimension as
-	 *         <tt>other</tt> and if all pixels have the same color;
-	 *         <tt>false</tt> otherwise
 	 */
 	public boolean equals(Object other) {
 		if (other == this)
@@ -282,22 +227,17 @@ public final class Picture {
 		throw new UnsupportedOperationException("hashCode() is not supported because pictures are mutable");
 	}
 
-	/**
+	/*
 	 * Saves the picture to a file in a standard image format. The filetype must
 	 * be .png or .jpg.
-	 *
-	 * @param name
-	 *            the name of the file
 	 */
 	public void save(String name) {
 		save(new File(name));
 	}
 
-	/**
+	/*
 	 * Saves the picture to a file in a PNG or JPEG image format.
 	 *
-	 * @param file
-	 *            the file
 	 */
 	public void save(File file) {
 		filename = file.getName();

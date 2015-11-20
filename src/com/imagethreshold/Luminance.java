@@ -1,14 +1,9 @@
 package com.imagethreshold;
 
-/******************************************************************************
-	 *
-	 *  Library for dealing with monochrome luminance. 
+/*
+ *  Library for dealing with monochrome luminance. 
 	 *  Uses the NTSC formula  Y = .299*r + .587*g + .114*b.
-	 *a
-	 *  % java Luminance 0 0 0 0 0 255
-	 *
-	 ******************************************************************************/
-
+ */
 import java.awt.Color;
 
 public class Luminance {

@@ -1,11 +1,9 @@
 package com.uielements;
-
+/*
+ * This class allows you to draw digits on screen that will be used for analysis
+ */
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 import com.abstractClasses.AbstractViewOptionPane;
 import com.connectedcomponents.FindConnectedComponents;
@@ -21,13 +19,8 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tab;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -57,6 +50,9 @@ public class CanvasOptionPane extends AbstractViewOptionPane {
 		
 	}
 
+	/*
+	 * Clears the drawing canvas
+	 */
 	private EventHandler<ActionEvent> clearCanvas() {
 		// TODO Auto-generated method stub
 		return new EventHandler<ActionEvent>() {
@@ -70,6 +66,9 @@ public class CanvasOptionPane extends AbstractViewOptionPane {
 		};
 	}
 
+	/*
+	 * Perform Digital analysis on canvas
+	 */
 	private EventHandler<ActionEvent> performAnalysisOnCanvas() {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
@@ -77,6 +76,7 @@ public class CanvasOptionPane extends AbstractViewOptionPane {
 
 			@Override
 			public void handle(ActionEvent event) {
+				
 				currentImage = imageDisplay.snapshot(null, currentImage);
 				
 
@@ -105,6 +105,9 @@ public class CanvasOptionPane extends AbstractViewOptionPane {
 		};
 	}
 
+	/*
+	 * Sets up the look of the view
+	 */
 	private void setUpGraphics() {
 		// TODO Auto-generated method stub
 		imageContentDisplay.setPadding(new Insets(10, 10, 10, 10));
@@ -119,10 +122,13 @@ public class CanvasOptionPane extends AbstractViewOptionPane {
 
 		finalResultArea.setFont(new Font(20));
 
-		setUpCanvas(graphicsContext);
+		setUpCanvas();
 
 	}
 	
+	/*
+	 * Reset the drawing canvas
+	 */
 	private void resetDrawingCanvas(){
 		graphicsContext.clearRect(0, 0, imageDisplay.getWidth(),
 				imageDisplay.getHeight() );
@@ -130,16 +136,19 @@ public class CanvasOptionPane extends AbstractViewOptionPane {
 		graphicsContext.fillRect(0, 0, imageDisplay.getWidth(), imageDisplay.getHeight());
 	}
 
-	private void setUpCanvas(GraphicsContext gc) {
+	/*
+	 *Set up canvas 
+	 */
+	private void setUpCanvas() {
 		// TODO Auto-generated method stub
-		double canvasWidth = gc.getCanvas().getWidth();
-		double canvasHeight = gc.getCanvas().getHeight();
+		double canvasWidth = graphicsContext.getCanvas().getWidth();
+		double canvasHeight = graphicsContext.getCanvas().getHeight();
 
-		gc.setFill(Color.WHITE);
-		gc.fillRect(0, 0, imageDisplay.getWidth(), imageDisplay.getHeight());
-		gc.setStroke(Color.BLACK);
+		graphicsContext.setFill(Color.WHITE);
+		graphicsContext.fillRect(0, 0, imageDisplay.getWidth(), imageDisplay.getHeight());
+		graphicsContext.setStroke(Color.BLACK);
 
-		gc.setLineWidth(5);
+		graphicsContext.setLineWidth(5);
 
 		imageDisplay.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 

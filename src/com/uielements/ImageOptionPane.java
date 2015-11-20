@@ -1,5 +1,8 @@
 package com.uielements;
 
+/*
+ * This class allows you to import images that will be used for analysis
+ */
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.List;
@@ -49,9 +52,9 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 	private VBox imageContentDisplay = new VBox(8, imageDisplay, buttonContent, finalResultArea);
 
 	private Image currentImage;
-	
-	private final int finalWidth = 381;
-	private final int finalHeight = 81;
+
+	private final int FINAL_WIDTH = 381;
+	private final int FINAL_HEIGHT = 81;
 
 	public ImageOptionPane() {
 
@@ -61,6 +64,9 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 		analyzeImage.setOnAction(startAnalyzesOnImage());
 	}
 
+	/*
+	 * Perform analysis on image
+	 */
 	private EventHandler<ActionEvent> startAnalyzesOnImage() {
 		// TODO Auto-generated method stub
 		return new EventHandler<ActionEvent>() {
@@ -69,7 +75,8 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				// First we need to convert the image to back and white
-				currentImage = new ImageToGrayscale(ImageOptionPane.this,(BufferedImage) currentImage).getConvertedImage();
+				currentImage = new ImageToGrayscale(ImageOptionPane.this, (BufferedImage) currentImage)
+						.getConvertedImage();
 
 				findCC = new FindConnectedComponents(ImageOptionPane.this, currentImage);
 
@@ -93,10 +100,9 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 		};
 	}
 
-	public void printResult(int[] data) {
-		System.out.println(data[0] + ", " + data[1] + ", " + data[2]);
-	}
-
+	/*
+	 * Sets up the look for this class
+	 */
 	public void setUpGraphics() {
 		imageContentDisplay.setPadding(new Insets(10, 10, 10, 10));
 		imageContentDisplay.setAlignment(Pos.CENTER);
@@ -113,6 +119,9 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 		finalResultArea.setFont(new Font(20));
 	}
 
+	/*
+	 * Select an image that will be used for analysis
+	 */
 	private EventHandler<ActionEvent> selectNewImage() {
 		// TODO Auto-generated method stub
 		return new EventHandler<ActionEvent>() {
@@ -133,8 +142,9 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 				File fileForAnalysis = chooseFile.showOpenDialog(getTabPane().getScene().getWindow());
 
 				try {
-					currentImage = resizeImage(ImageIO.read(fileForAnalysis));
-					javafx.scene.image.Image temp = SwingFXUtils.toFXImage(resizeImage(ImageIO.read(fileForAnalysis)), null);
+					currentImage = setImageSize(ImageIO.read(fileForAnalysis));
+					javafx.scene.image.Image temp = SwingFXUtils.toFXImage(setImageSize(ImageIO.read(fileForAnalysis)),
+							null);
 					imageDisplay.setImage(temp);
 					analyzeImage.setDisable(false);
 					logArea.append(LogAreaEnums.ImageReadyForAnalysis);
@@ -150,19 +160,20 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 	}
 
 	/*
-	 * Resize the image if either the height or the width is greater than the preferred size
+	 * Resize the image if either the height or the width is greater than the
+	 * preferred size
 	 */
-	public BufferedImage resizeImage(BufferedImage image) {
-		
-		BufferedImage resizedImage  = null;
-		if (image.getWidth() > finalWidth || image.getHeight() > finalHeight) {
+	public BufferedImage setImageSize(BufferedImage image) {
 
-			resizedImage = new BufferedImage(finalWidth, finalHeight, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage resizedImage = null;
+		if (image.getWidth() > FINAL_WIDTH || image.getHeight() > FINAL_HEIGHT) {
+
+			resizedImage = new BufferedImage(FINAL_WIDTH, FINAL_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g = resizedImage.createGraphics();
-			g.drawImage(image, 0, 0, finalWidth, finalHeight, null);
+			g.drawImage(image, 0, 0, FINAL_WIDTH, FINAL_HEIGHT, null);
 			g.dispose();
 
-		}else{
+		} else {
 			return image;
 		}
 

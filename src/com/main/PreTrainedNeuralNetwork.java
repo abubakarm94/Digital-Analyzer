@@ -1,26 +1,20 @@
 package com.main;
-
-import java.awt.Color;
-import java.awt.Graphics2D;
+/*
+ * The class will contain a pre-trained network along with necessary configuration
+ */
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.Arrays;
-
-import javax.imageio.ImageIO;
-
 import com.abstractClasses.AbstractViewOptionPane;
-import com.connectedcomponents.Pixel;
 import com.uielements.LogArea;
 
 import net.vivin.neural.NeuralNetwork;
 
 public class PreTrainedNeuralNetwork {
 
-	static PreTrainedNeuralNetwork instance = null;
+	private static PreTrainedNeuralNetwork instance = null;
 
 	private NeuralNetwork neuralNetwork = null;
 
@@ -30,6 +24,7 @@ public class PreTrainedNeuralNetwork {
 
 	public static PreTrainedNeuralNetwork getInstance(AbstractViewOptionPane view) {
 
+		//gets the log area
 		logArea = view.getLogArea();
 
 		if (instance == null) {

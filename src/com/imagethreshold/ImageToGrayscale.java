@@ -1,12 +1,9 @@
 package com.imagethreshold;
-/******************************************************************************
- *  Dependencies: Picture.java Luminance.java
- *
- *  Reads in a JPEG/GIF/PNG file
- *  converts all pixels to grayscale, and displays those
- *  pixels with a grayscale value >= 180.
- *
- ******************************************************************************/
+
+/*Dependencies:Picture.java Luminance.java
+ * *Reads in a JPEG/GIF/PNG file*
+ * converts all pixels to grayscale,and displays those*
+ * pixels with a grayscale value>=180.*/
 
 import java.awt.Color;
 import java.awt.Image;
@@ -21,13 +18,13 @@ public class ImageToGrayscale {
 	private Image convertedImage;
 	private Picture pic;
 	private final int THRESHOLD = 180;
-	
 	private LogArea logArea = null;
 
-	public ImageToGrayscale(AbstractViewOptionPane view,String imagePath) {
+	public ImageToGrayscale(AbstractViewOptionPane view, String imagePath) {
 
+		//gets the log area
 		logArea = view.getLogArea();
-		
+
 		logArea.append(LogAreaEnums.ImageConversionStarted);
 
 		pic = new Picture(imagePath);
@@ -46,12 +43,13 @@ public class ImageToGrayscale {
 		convertedImage = pic.getImage();
 		logArea.append(LogAreaEnums.ImageConversionFinished);
 
-	
 	}
+
 	public ImageToGrayscale(AbstractViewOptionPane view, BufferedImage imagePath) {
 
+		//gets the log area
 		logArea = view.getLogArea();
-		
+
 		logArea.append(LogAreaEnums.ImageConversionStarted);
 
 		pic = new Picture(imagePath);
@@ -70,12 +68,11 @@ public class ImageToGrayscale {
 		convertedImage = pic.getImage();
 		logArea.append(LogAreaEnums.ImageConversionFinished);
 
-	
 	}
-	
-	public Image getConvertedImage(){
+
+	//returns the grayscale image
+	public Image getConvertedImage() {
 		return convertedImage;
 	}
-	
-	
+
 }

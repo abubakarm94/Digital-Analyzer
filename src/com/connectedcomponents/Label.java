@@ -1,3 +1,6 @@
+/*
+ * This Class acts as an identifier for pixel patterns
+ */
 package com.connectedcomponents;
 
 public class Label {
@@ -13,18 +16,19 @@ public class Label {
 		this.Rank = 0;
 	}
 
+	//gets the name of the pixel
 	public int getName() {
 		return name;
 	}
 
+	/*
+	 * Sets the name of the pixel
+	 */
 	public void setName(int name) {
 		this.name = name;
 	}
 
-	public Label getRoot() {
-		return Root;
-	}
-
+	//sets the start position
 	public void setRoot(Label root) {
 		Root = root;
 	}
@@ -37,6 +41,9 @@ public class Label {
 		Rank = rank;
 	}
 
+	/*
+	 * Gets the start node of the label
+	 */
 	public Label GetRoot() {
 		if (this.Root != this) {
 			this.Root = this.Root.GetRoot();
@@ -45,6 +52,9 @@ public class Label {
 		return this.Root;
 	}
 
+	/*
+	 * Grounds label together
+	 */
 	public void Join(Label root2) {
 		if (root2.Rank < this.Rank) // is the rank of Root2 less than that of
 									// Root1 ?

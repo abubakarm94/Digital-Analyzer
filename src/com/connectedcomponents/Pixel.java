@@ -1,3 +1,6 @@
+/*
+ * This class acts as the pixel object for images
+ */
 package com.connectedcomponents;
 
 public class Pixel

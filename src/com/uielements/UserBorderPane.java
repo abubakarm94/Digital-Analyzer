@@ -1,8 +1,8 @@
 package com.uielements;
 
-
-
-
+/*
+ * This Class starts the user interaction
+ */
 
 import com.abstractClasses.AbstractViewOptionPane;
 import com.enums.CanvasOrImageSelector;
@@ -35,17 +35,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>{
+public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent> {
 
 	private MenuBar menuBar = new MenuBar();
 
 	private final Menu fileMenu = new Menu("File");
-	private final Menu featuresMenu = new Menu("Features");
 
 	private MenuItem fileNew = new MenuItem("New Digital Analysis (CTRL - N)");
+
 	private final MenuItem fileExit = new MenuItem("Exit");
 
 	private TabPane contentTab = new TabPane();
+
 
 	/*
 	 * Sets up the default configuration
@@ -54,19 +55,18 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 
 		// sets up the appropriate functionality for the menu
 		configureMenuBar();
-		
-		//When a certain key is pressed
+
+		// When a certain key is pressed
 		this.addEventHandler(KeyEvent.ANY, this);
-		
+
+		// adds the tabs to the left of the screen
 		contentTab.setSide(Side.LEFT);
-		
+
+		// adds tab pane to the center
 		this.setCenter(contentTab);
-		
-		
+
 
 	}
-
-
 
 	/*
 	 * sets up the functionality of the menubar
@@ -75,7 +75,7 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 
 		fileMenu.getItems().addAll(fileNew, fileExit);
 
-		menuBar.getMenus().addAll(fileMenu, featuresMenu);
+		menuBar.getMenus().addAll(fileMenu);
 
 		this.setTop(menuBar);
 
@@ -85,10 +85,11 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 		// sets up the user exit
 		fileExit.setOnAction(exitMenuClicked());
 
-
-
 	}
 
+	/*
+	 * Start neural network
+	 */
 	private void trainNeuralNetwork(AbstractViewOptionPane tabInUse) {
 		// TODO Auto-generated method stub
 
@@ -119,7 +120,6 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 		// TODO Auto-generated method stub
 		return new EventHandler<ActionEvent>() {
 
-			
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 
@@ -129,8 +129,9 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 		};
 	}
 
-
-
+	/*
+	 * Show the dialog to select new analysis view
+	 */
 	@SuppressWarnings("unchecked")
 	private void showOpenAnalysisDialog() {
 		// TODO Auto-generated method stub
@@ -152,18 +153,17 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 			@Override
 			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
-				
 
 				CanvasOrImageSelector ciSelector = (CanvasOrImageSelector) optionSelector.getSelectionModel()
 						.getSelectedItem();
-				
+
 				/*
 				 * Instantiate new class
 				 */
 				AbstractViewOptionPane currentTab = null;
-				
+
 				try {
-					currentTab = (AbstractViewOptionPane)ciSelector.getSelectedOption().newInstance();
+					currentTab = (AbstractViewOptionPane) ciSelector.getSelectedOption().newInstance();
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -171,13 +171,12 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
+
 				if (selectNetwork.isSelected()) {
 
 					trainNeuralNetwork(currentTab);
 				}
-				
+
 				currentTab.setText(ciSelector.getValue());
 
 				contentTab.getTabs().addAll(currentTab);
@@ -199,24 +198,18 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 		parentStage.setScene(secondScene);
 
 		parentStage.show();
-		
+
 	}
 
-
-
 	/*
-	 * Used for when Ctrl and N is pressed
+	 * Used in cases when keys are pressed
 	 */
 	@Override
 	public void handle(KeyEvent event) {
 		// TODO Auto-generated method stub
-		if(event.isControlDown() && event.getCode() ==KeyCode.N){
+		if (event.isControlDown() && event.getCode() == KeyCode.N) {
 			showOpenAnalysisDialog();
 		}
 	}
-	
-	
-
-
 
 }

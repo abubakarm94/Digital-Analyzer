@@ -1,3 +1,6 @@
+/*
+ * This enum is used in the Log Area for appending data
+ */
 package com.enums;
 
 public enum LogAreaEnums {
