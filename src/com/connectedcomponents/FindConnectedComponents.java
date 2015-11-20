@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import com.abstractClasses.AbstractViewOptionPane;
 import com.abstractClasses.PixelPosition;
 import com.enums.LogAreaEnums;
 import com.uielements.LogArea;
@@ -26,8 +27,8 @@ public class FindConnectedComponents extends PixelPosition{
 	private int _height;
 	private int backgroundColor;
 	
-	//resize the image to 28
-	private final int imageSize = 20;
+	//will later be padded to make 28
+	private final int IMAGE_SIZE = 20;
 	
 	//This contains the list of the connected components
 	private ArrayList<List<Pixel>> connectedImages;
@@ -36,10 +37,12 @@ public class FindConnectedComponents extends PixelPosition{
 	private final int bgColor = 0xFFFFFFFF; 
 	
 	//used for logging
-	private LogArea logArea = LogArea.getInstance();
+	private LogArea logArea = null;
 	
 
-	public FindConnectedComponents(Image passedImage) {
+	public FindConnectedComponents(AbstractViewOptionPane view, Image passedImage) {
+		
+		logArea = view.getLogArea();
 		
 		try {
 
@@ -253,14 +256,14 @@ public class FindConnectedComponents extends PixelPosition{
 	  private  BufferedImage resizeImage(BufferedImage originalImage){
 		  	final int shiftBy = 2;
 		  	
-			BufferedImage resizedImage = new BufferedImage(imageSize, imageSize,  BufferedImage.TYPE_INT_ARGB);
+			BufferedImage resizedImage = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE,  BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g = resizedImage.createGraphics();
 			
 			
-			int dx1 = (((originalImage.getWidth()/originalImage.getHeight())*imageSize)+shiftBy);
+			int dx1 = (((originalImage.getWidth()/originalImage.getHeight())*IMAGE_SIZE)+shiftBy);
 			int dy1 = shiftBy;
-			int dx2 = (imageSize - dx1);
-			int dy2 = (imageSize - dy1);
+			int dx2 = (IMAGE_SIZE - dx1);
+			int dy2 = (IMAGE_SIZE - dy1);
 			
 			
 			g.drawImage(originalImage, dx1,dy1, dx2,dy2, 0,0, originalImage.getWidth(), originalImage.getHeight(), null);

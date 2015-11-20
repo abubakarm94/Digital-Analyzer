@@ -1,5 +1,6 @@
 package com.enums;
 
+import com.abstractClasses.AbstractViewOptionPane;
 import com.uielements.CanvasOptionPane;
 import com.uielements.ImageOptionPane;
 import com.uielements.TrainOnCanvasOptionPane;
@@ -12,9 +13,9 @@ public enum CanvasOrImageSelector {
 	CanvasTrainingSelector("Train Neural Network using Canvas", new TrainOnCanvasOptionPane());
 
 	private String title;
-	private Tab selectedOption;
+	private AbstractViewOptionPane selectedOption;
 
-	CanvasOrImageSelector(String data, Tab selectedClass) {
+	CanvasOrImageSelector(String data, AbstractViewOptionPane selectedClass) {
 		title = data;
 		selectedOption = selectedClass;
 
@@ -24,7 +25,7 @@ public enum CanvasOrImageSelector {
 		return title;
 	}
 
-	public Tab getSelectedOption() {
+	public AbstractViewOptionPane getSelectedOption() {
 		return selectedOption;
 	}
 

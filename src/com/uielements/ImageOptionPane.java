@@ -69,13 +69,13 @@ public class ImageOptionPane extends AbstractViewOptionPane {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				// First we need to convert the image to back and white
-				currentImage = new ImageToGrayscale((BufferedImage) currentImage).getConvertedImage();
+				currentImage = new ImageToGrayscale(ImageOptionPane.this,(BufferedImage) currentImage).getConvertedImage();
 
-				findCC = new FindConnectedComponents(currentImage);
+				findCC = new FindConnectedComponents(ImageOptionPane.this, currentImage);
 
 				imageDisplay.setImage(SwingFXUtils.toFXImage(findCC.getProcessedImage(), null));
 
-				neuralNetwork = PreTrainedNeuralNetwork.getInstance();
+				neuralNetwork = PreTrainedNeuralNetwork.getInstance(ImageOptionPane.this);
 				ArrayList<BufferedImage> list = findCC.getConnectedComponentsAsList();
 				String result = "";
 				for (BufferedImage bi : list) {

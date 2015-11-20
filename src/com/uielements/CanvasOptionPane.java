@@ -80,15 +80,15 @@ public class CanvasOptionPane extends AbstractViewOptionPane {
 				currentImage = imageDisplay.snapshot(null, currentImage);
 				
 
-				java.awt.Image tempImage = new ImageToGrayscale(SwingFXUtils.fromFXImage(currentImage, null)).getConvertedImage();
+				java.awt.Image tempImage = new ImageToGrayscale(CanvasOptionPane.this,SwingFXUtils.fromFXImage(currentImage, null)).getConvertedImage();
 
-				findCC = new FindConnectedComponents(tempImage);
+				findCC = new FindConnectedComponents(CanvasOptionPane.this, tempImage);
 
 				resetDrawingCanvas();
 				
 				graphicsContext.drawImage(SwingFXUtils.toFXImage(findCC.getProcessedImage(), null), 0, 0);
 
-				neuralNetwork = PreTrainedNeuralNetwork.getInstance();
+				neuralNetwork = PreTrainedNeuralNetwork.getInstance(CanvasOptionPane.this);
 				ArrayList<BufferedImage> list = findCC.getConnectedComponentsAsList();
 				String result = "";
 				for (BufferedImage bi : list) {

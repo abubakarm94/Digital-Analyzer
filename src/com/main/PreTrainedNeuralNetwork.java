@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
+import com.abstractClasses.AbstractViewOptionPane;
 import com.connectedcomponents.Pixel;
 import com.uielements.LogArea;
 
@@ -25,10 +26,12 @@ public class PreTrainedNeuralNetwork {
 
 	private final int imageSize = 28;
 
-	private LogArea logArea = LogArea.getInstance();
+	private static LogArea logArea = null;
 
-	public static PreTrainedNeuralNetwork getInstance() {
+	public static PreTrainedNeuralNetwork getInstance(AbstractViewOptionPane view) {
 
+		logArea = view.getLogArea();
+		
 		if (instance == null) {
 			try {
 				instance = new PreTrainedNeuralNetwork();

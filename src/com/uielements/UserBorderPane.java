@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.imageio.ImageWriter;
 
+import com.abstractClasses.AbstractViewOptionPane;
 import com.enums.CanvasOrImageSelector;
 import com.main.PreTrainedNeuralNetwork;
 
@@ -82,10 +83,10 @@ public class UserBorderPane extends BorderPane {
 
 	}
 
-	private void trainNeuralNetwork() {
+	private void trainNeuralNetwork(AbstractViewOptionPane tabInUse) {
 		// TODO Auto-generated method stub
 
-		PreTrainedNeuralNetwork network = PreTrainedNeuralNetwork.getInstance();
+		PreTrainedNeuralNetwork network = PreTrainedNeuralNetwork.getInstance(tabInUse);
 
 	}
 
@@ -135,14 +136,16 @@ public class UserBorderPane extends BorderPane {
 					@Override
 					public void handle(Event arg0) {
 						// TODO Auto-generated method stub
-						if (selectNetwork.isSelected()) {
-
-							trainNeuralNetwork();
-						}
+						
 
 						CanvasOrImageSelector ciSelector = (CanvasOrImageSelector) optionSelector.getSelectionModel()
 								.getSelectedItem();
-						Tab currentTab = ciSelector.getSelectedOption();
+						AbstractViewOptionPane currentTab = ciSelector.getSelectedOption();
+						
+						if (selectNetwork.isSelected()) {
+
+							trainNeuralNetwork(currentTab);
+						}
 						
 						currentTab.setText(ciSelector.getValue());
 

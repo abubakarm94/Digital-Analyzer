@@ -76,7 +76,7 @@ public class TrainOnCanvasOptionPane extends AbstractViewOptionPane {
 
 				BufferedImage newImage = resizeImage(SwingFXUtils.fromFXImage(currentImage, null));
 
-				ImageToGrayscale what = new ImageToGrayscale(newImage);	
+				ImageToGrayscale what = new ImageToGrayscale(TrainOnCanvasOptionPane.this, newImage);	
 				
 				finalResultArea.setText("This part is the software is still being worked on");
 				//	System.out.println(Integer.parseInt(equalityTextArea.getText().toString()));

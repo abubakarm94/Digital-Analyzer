@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import com.abstractClasses.AbstractViewOptionPane;
 import com.enums.LogAreaEnums;
 import com.uielements.LogArea;
 
@@ -21,10 +22,12 @@ public class ImageToGrayscale {
 	private Picture pic;
 	private final int THRESHOLD = 180;
 	
-	private LogArea logArea = LogArea.getInstance();
+	private LogArea logArea = null;
 
-	public ImageToGrayscale(String imagePath) {
+	public ImageToGrayscale(AbstractViewOptionPane view,String imagePath) {
 
+		logArea = view.getLogArea();
+		
 		logArea.append(LogAreaEnums.ImageConversionStarted);
 
 		pic = new Picture(imagePath);
@@ -45,8 +48,10 @@ public class ImageToGrayscale {
 
 	
 	}
-	public ImageToGrayscale(BufferedImage imagePath) {
+	public ImageToGrayscale(AbstractViewOptionPane view, BufferedImage imagePath) {
 
+		logArea = view.getLogArea();
+		
 		logArea.append(LogAreaEnums.ImageConversionStarted);
 
 		pic = new Picture(imagePath);

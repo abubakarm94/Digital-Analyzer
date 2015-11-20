@@ -14,7 +14,7 @@ public abstract class AbstractViewOptionPane extends Tab{
 	
 	protected SplitPane splitScreen = new SplitPane();
 	
-	protected LogArea logArea = LogArea.getInstance();
+	protected LogArea logArea = new LogArea();
 	
 	protected final BorderPane contentLayout = new BorderPane();
 
@@ -29,6 +29,10 @@ public abstract class AbstractViewOptionPane extends Tab{
 
 		this.setClosable(false);
 		this.setContent(splitScreen);
+	}
+	
+	public LogArea getLogArea(){
+		return logArea;
 	}
 	
 
