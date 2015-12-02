@@ -91,6 +91,8 @@ public class FindConnectedComponents extends PixelPosition {
 			BufferedImage bmp = CreateBitmap(temp);
 			// add each connected components to the array list
 			connectedImages.add(temp);
+
+
 			
 			images.put(id, bmp);
 		}
@@ -255,7 +257,14 @@ public class FindConnectedComponents extends PixelPosition {
 		if (IMAGE_SIZE >= originalImage.getWidth()) {
 			dx1 = IMAGE_SIZE - originalImage.getWidth();
 			
-			dx2 = (originalImage.getWidth());
+			if(dx1 > originalImage.getWidth() ){
+				int temp = dx1;
+				dx1 = originalImage.getWidth();
+				dx2 = temp-1;
+
+			}else{
+				dx2 = originalImage.getWidth();
+			}
 			
 
 		}
