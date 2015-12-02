@@ -57,7 +57,7 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 		configureMenuBar();
 
 		// When a certain key is pressed
-		this.addEventHandler(KeyEvent.ANY, this);
+		this.addEventHandler(KeyEvent.KEY_PRESSED, this);
 
 		// adds the tabs to the left of the screen
 		contentTab.setSide(Side.LEFT);
@@ -208,6 +208,7 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 	public void handle(KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (event.isControlDown() && event.getCode() == KeyCode.N) {
+			System.out.println("dsd");
 			showOpenAnalysisDialog();
 		}
 	}

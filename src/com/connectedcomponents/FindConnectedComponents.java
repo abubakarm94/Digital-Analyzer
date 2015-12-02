@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class FindConnectedComponents extends PixelPosition {
 			BufferedImage bmp = CreateBitmap(temp);
 			// add each connected components to the array list
 			connectedImages.add(temp);
-
+			
 			images.put(id, bmp);
 		}
 		inputGD.dispose();
@@ -253,7 +254,9 @@ public class FindConnectedComponents extends PixelPosition {
 		// Keep original width if possible
 		if (IMAGE_SIZE >= originalImage.getWidth()) {
 			dx1 = IMAGE_SIZE - originalImage.getWidth();
+			
 			dx2 = (originalImage.getWidth());
+			
 
 		}
 
