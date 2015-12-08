@@ -49,6 +49,7 @@ public class PreTrainedNeuralNetwork {
 		ObjectInputStream in = new ObjectInputStream(new FileInputStream("TrainedNeuralNetworkToBeUsed.net"));
 
 		neuralNetwork = neuralNetwork = (NeuralNetwork) in.readObject();
+		
 	}
 
 	/*

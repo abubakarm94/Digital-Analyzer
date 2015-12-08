@@ -208,7 +208,6 @@ public class UserBorderPane extends BorderPane implements EventHandler<KeyEvent>
 	public void handle(KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (event.isControlDown() && event.getCode() == KeyCode.N) {
-			System.out.println("dsd");
 			showOpenAnalysisDialog();
 		}
 	}

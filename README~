@@ -1,0 +1,39 @@
+# LightWeight Array-Based Object Pooling Implementation
+
+# WHAT IS OBJECT POOLING
+
+Object pools are simply containers which contains a specified amount of objects. Objects can be borrowed from
+the object pool, when an object is taken from the object pool that object is not available until it is returned.
+
+# HOW TO USE
+
+1. initialize the object pool
+
+	private PoolableObject<SPECIFIEDCLASS> testPoolableObject;
+
+	testPoolableObject = new PoolableObject<SPECIFIEDCLASS>(7){
+
+			@Override
+			protected TestClass createPoolableObject() {
+				// TODO Auto-generated method stub
+				return new TestClass();
+			}
+			
+		};
+		
+	LOOK AT mainJUnit CLASS FOR MORE INFORMATION
+
+2. now you can borrow objects
+	
+	SPECIFIEDCLASS sampleClass = testPoolableObject.borrowObject();
+	
+3. return the borrowed object when you're done using it
+
+	testPoolableObject.returnBorrowedObject(sampleClass);
+	
+	
+# BENEFITS OF OBJECT POOLING
+
+1. Can significantly improved performance when object creation is expensive. Examples are database connections, socked
+connections etc.
+2. It is the most effective in a situation where the rate of class instance initialization is high
