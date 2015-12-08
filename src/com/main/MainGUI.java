@@ -20,7 +20,7 @@ public class MainGUI extends Application{
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
 		this.primaryStage = stage;
-		this.primaryStage.setTitle("Digital Analyzer");
+		this.primaryStage.setTitle("Digit 2 Screen");
 		
 		rootLayout = new UserBorderPane();
 		Scene scene = new Scene(rootLayout, 900, 600);
