@@ -1,22 +1,22 @@
-# Digit 2 Screen
+## Digit 2 Screen
 
-# WHAT IS DIGIT 2 SCREEN
+## WHAT IS DIGIT 2 SCREEN
 
 The goal of our project is to convert handwritten digits into digital digits. The bulk of the work is done through a neural network that allows the computer to learn various samples from persistent training. In doing this, we are trying to figure out the best way to implement a neural network that would work analogous with programs dealing with image thresholding and connected components. Due to the time constraint ahead of us, we are also trying to figure out the fastest way to implement this. We chose this project because originally we wanted to do something with deep learning. We were very fascinated with the way that various companies such as Facebook have been able to do things concerning this topic and thus decided to do something similar to this.
 
-# MORE INFO
+## MORE INFO
 
 http://abubakarm94.github.io/Digital-Analyzer/
 
-# HOW TO USE
+## HOW TO USE
 
 Run the MainGUI file inside the source folder
 	
-# Team mates
+## Team mates
 
 Eon Mattis, Abubakar Mohammed (myself), Jasmine Serano, MIchaela Wilkins
 
-# Credits
+## Credits
 
 Vivin's Neural Network
 Omar Gaameel Salem's Connected Component's algorithm

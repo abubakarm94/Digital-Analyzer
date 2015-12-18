@@ -1,39 +1,24 @@
-# LightWeight Array-Based Object Pooling Implementation
+# Digit 2 Screen
 
-# WHAT IS OBJECT POOLING
+# WHAT IS DIGIT 2 SCREEN
 
-Object pools are simply containers which contains a specified amount of objects. Objects can be borrowed from
-the object pool, when an object is taken from the object pool that object is not available until it is returned.
+The goal of our project is to convert handwritten digits into digital digits. The bulk of the work is done through a neural network that allows the computer to learn various samples from persistent training. In doing this, we are trying to figure out the best way to implement a neural network that would work analogous with programs dealing with image thresholding and connected components. Due to the time constraint ahead of us, we are also trying to figure out the fastest way to implement this. We chose this project because originally we wanted to do something with deep learning. We were very fascinated with the way that various companies such as Facebook have been able to do things concerning this topic and thus decided to do something similar to this.
+
+# MORE INFO
+
+http://abubakarm94.github.io/Digital-Analyzer/
 
 # HOW TO USE
 
-1. initialize the object pool
-
-	private PoolableObject<SPECIFIEDCLASS> testPoolableObject;
-
-	testPoolableObject = new PoolableObject<SPECIFIEDCLASS>(7){
-
-			@Override
-			protected TestClass createPoolableObject() {
-				// TODO Auto-generated method stub
-				return new TestClass();
-			}
-			
-		};
-		
-	LOOK AT mainJUnit CLASS FOR MORE INFORMATION
-
-2. now you can borrow objects
+Run the MainGUI file inside the source folder
 	
-	SPECIFIEDCLASS sampleClass = testPoolableObject.borrowObject();
-	
-3. return the borrowed object when you're done using it
+# Team mates
 
-	testPoolableObject.returnBorrowedObject(sampleClass);
-	
-	
-# BENEFITS OF OBJECT POOLING
+Eon Mattis, Abubakar Mohammed (myself), Jasmine Serano, MIchaela Wilkins
 
-1. Can significantly improved performance when object creation is expensive. Examples are database connections, socked
-connections etc.
-2. It is the most effective in a situation where the rate of class instance initialization is high
+# Credits
+
+Vivin's Neural Network
+Omar Gaameel Salem's Connected Component's algorithm
+
+
